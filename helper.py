@@ -1,5 +1,7 @@
 from enum import Enum
 
+import os
+
 class Feedback(Enum):
     correct = 2
     present = 1
@@ -13,7 +15,7 @@ def parse_slot_feedback(enum_member_name):
 def load_corpus(size):
     wordList = []
     if size == 5 or size == 6:
-        filename = "corpus{}.txt".format(size)
+        filename = "{}/corpus/corpus{}.txt".format(os.getcwd(),size)
         corpus_file = open(filename)
         for word in corpus_file:
             wordList.append(corpus_file.readline().strip())

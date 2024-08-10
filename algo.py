@@ -63,7 +63,7 @@ max_guesses = maximum number of guesses we give the agent. set to wordle default
 Algorithm sourced from 
     https://medium.com/@devin.p.quinn/solving-wordle-using-monte-carlo-tree-search-reinforcement-725562779c8b
 """
-def run_random_guesser(size=5, max_guesses=6):    
+def run_random_guesser(words, size, max_guesses=6, verbose=False):    
     ## https://mitsloan.mit.edu/ideas-made-to-matter/how-algorithm-solves-wordle
     ## https://x.com/jshkatz/status/1560007611038289921
     word_guess = "salet"
@@ -72,7 +72,8 @@ def run_random_guesser(size=5, max_guesses=6):
         word_guess = "slates"
 
     alphabet = [chr(letter) for letter in range(ord('a'), ord('z') + 1)]
-    corpus = helper.load_corpus(size)
+    ## copy to avoid mutating words
+    corpus = list(words)
     guesses = 0
     seed = randrange(1, 9999)
 
@@ -94,8 +95,9 @@ def run_random_guesser(size=5, max_guesses=6):
         (word, feature_set) = validate_guess(guess_random_word(word_guess, seed, size))
 
         if did_we_win(feature_set, size):
-            print("Random word solved! The word was {0}".format(word))
-            print("You needed {0} guess(es)".format(str(guesses)))
+            if verbose: 
+                print("Random word solved! The word was {0}".format(word))
+                print("You needed {0} guess(es)".format(str(guesses)))
             return guesses
         
         for slot in feature_set:
@@ -166,5 +168,5 @@ def run_random_guesser(size=5, max_guesses=6):
             if len(currentGreenPool) > 0:
                 word_guess = choice(currentGreenPool)
 
-    print(f"Failed to guess the random word after {max_guesses} attempts")
+    if verbose: print(f"Failed to guess the random word after {max_guesses} attempts")
     return -1
