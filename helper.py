@@ -7,6 +7,11 @@ class Feedback(Enum):
     present = 1
     absent = 0
 
+class BattleType(Enum):
+    SINGLESEED = 1
+    BESTOFHUNDO = 2
+    ## Add extra modes here.
+
 def parse_slot_feedback(enum_member_name):
     value = Feedback[enum_member_name].value
 
