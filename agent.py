@@ -30,26 +30,18 @@ class VoteeBattler:
         return self.battleType
     
     def runSingleSeed(self):
-        print("====== Wordle Parameters ======")
-        print("WORD LENGTH: {0}".format(str(self.wordLength)))
-        print("GUESS ATTEMPTS: {0}".format(str(self.guessAttempts)))
-
         print("Agent doing a single round against randomizer.")
 
         algo.run_random_guesser(self.wordBank, self.wordLength, self.guessAttempts, True)
     
     def runBestOfHundo(self):
-        print("====== Wordle Parameters ======")
-        print("WORD LENGTH: {0}".format(str(self.wordLength)))
-        print("GUESS ATTEMPTS: {0}".format(str(self.guessAttempts)))
-
         tries = 0
         guesses = 0
         wins = 0
         losses = 0
         start = perf_counter()
 
-        print("Agent battling against randomizer. This may take a while")
+        print("Agent battling against randomizer. This may take a while, please wait.")
 
         while tries < 100:
             soln = algo.run_random_guesser(self.wordBank, self.wordLength, self.guessAttempts)

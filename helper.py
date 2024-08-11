@@ -10,7 +10,15 @@ class Feedback(Enum):
 class BattleType(Enum):
     SINGLESEED = 1
     BESTOFHUNDO = 2
-    ## Add extra modes here.
+    ## Add extra modes here. Don't forget to add it to modeMap.
+
+    @classmethod
+    def stringifyMode(cls, mode):
+        modeMap = {
+            BattleType.SINGLESEED.value: "Single Word Mode",
+            BattleType.BESTOFHUNDO.value: "Best of 100 Words Mode"
+        }
+        return modeMap[mode]
 
 def parse_slot_feedback(enum_member_name):
     value = Feedback[enum_member_name].value
