@@ -66,10 +66,12 @@ Algorithm sourced from
 def run_random_guesser(words, size, max_guesses=6, verbose=False):    
     ## https://mitsloan.mit.edu/ideas-made-to-matter/how-algorithm-solves-wordle
     ## https://x.com/jshkatz/status/1560007611038289921
-    word_guess = "salet"
+    possible_guesses = ["slate", "crane", "slant", "trace", "crate", "carte"]
 
     if size == 6:
-        word_guess = "slates"
+        possible_guesses = ["slates", "cranes", "slants", "traced", "crates", "cartel"]
+    
+    word_guess = choice(possible_guesses)
 
     alphabet = [chr(letter) for letter in range(ord('a'), ord('z') + 1)]
     ## copy to avoid mutating words
@@ -96,7 +98,7 @@ def run_random_guesser(words, size, max_guesses=6, verbose=False):
 
         if did_we_win(feature_set, size):
             if verbose: 
-                print("Random word solved! The word was {0}".format(word))
+                print("Random word solved! The word was {0} (seed {1})".format(word, seed))
                 print("You needed {0} guess(es)".format(str(guesses)))
             return guesses
         
@@ -115,7 +117,7 @@ def run_random_guesser(words, size, max_guesses=6, verbose=False):
                 if letter not in alphabet:
                     corpus.remove(word)
                     break
-        
+
         ## Remove words from the corpus that do not contain letters in correct slots.
         for word in corpus:
             for slot, letter in list(correct_letters.items()):
@@ -168,5 +170,5 @@ def run_random_guesser(words, size, max_guesses=6, verbose=False):
             if len(currentGreenPool) > 0:
                 word_guess = choice(currentGreenPool)
 
-    if verbose: print(f"Failed to guess the random word after {max_guesses} attempts")
+    if verbose: print(f"Failed to guess the random word after {max_guesses} attempts. Random word seed was {seed}")
     return -1

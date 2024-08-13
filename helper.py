@@ -10,13 +10,15 @@ class Feedback(Enum):
 class BattleType(Enum):
     SINGLESEED = 1
     BESTOFHUNDO = 2
+    BESTOF10000 = 3
     ## Add extra modes here. Don't forget to add it to modeMap.
 
     @classmethod
     def stringifyMode(cls, mode):
         modeMap = {
             BattleType.SINGLESEED.value: "Single Word Mode",
-            BattleType.BESTOFHUNDO.value: "Best of 100 Words Mode"
+            BattleType.BESTOFHUNDO.value: "Best of 100 Words Mode",
+            BattleType.BESTOF10000.value: "Best of 10000 Words Mode"
         }
         return modeMap[mode]
 
